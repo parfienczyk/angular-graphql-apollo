@@ -1,0 +1,39 @@
+@import 'buttons';
+section {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  transition: width 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  &.loading {
+    pointer-events: none;
+    opacity: 0.9;
+  }
+}
+
+$loader-size: 15px;
+$border-size: 3px;
+// ------------------ ------------------
+// ------------------ ------------------
+// ------------------ ------------------
+.loader {
+  display: inline-block;
+  margin-right: 10px;
+  border: $border-size solid #f3f3f3;
+  border-top: $border-size solid #3498db;
+  border-radius: 50%;
+  width: $loader-size;
+  height: $loader-size;
+  animation: spin 0.8s infinite linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

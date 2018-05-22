@@ -1,0 +1,10 @@
+<h3>SIGN IN</h3>
+<form [formGroup]="form" novalidate (submit)="onSubmit()">
+  <div>
+    <input type="text" class="form-control" formControlName="username" placeholder="Username">
+  </div>
+  <div>
+    <input type="text" class="form-control" formControlName="password" placeholder="Password">
+  </div>
+  <button type="submit" [disabled]="!form.valid">LOGIN</button>
+</form>

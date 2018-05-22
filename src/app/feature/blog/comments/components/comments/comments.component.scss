@@ -1,0 +1,15 @@
+:root {
+  --delay: 0;
+}
+
+article {
+  margin-bottom: 15px;
+  p {
+    margin: 0;
+    font-style: italic;
+  }
+  .info {
+    color: rgba(175, 175, 175, 1);
+    font-size: 11px;
+  }
+}

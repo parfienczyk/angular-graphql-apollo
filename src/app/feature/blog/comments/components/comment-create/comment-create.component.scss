@@ -1,0 +1,10 @@
+form {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  grid-gap: 10px;
+  margin-bottom: 15px;
+  input[type="text"],
+  button[type="submit"] {
+    height: 45px;
+  }
+}
