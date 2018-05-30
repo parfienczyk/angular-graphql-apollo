@@ -17,14 +17,14 @@ import { Post } from '../../models/Post';
       <img src="./assets/images/Arrows-Left-icon.png" alt="Back to Posts" width="40">
     </a>
 
-    <h4 *ngIf="loading">Loading...</h4>
+    <h2 *ngIf="loading">Loading...</h2>
 
     <article class="post" *ngIf="post">
-      <div class="info">{{ post.createdAt | date }}</div>
+      <div class="date">{{ post.createdAt | date }}</div>
       <h1 class="title">{{ post.title }}</h1>
 
       <div class="stats">
-        <div>
+        <div style="display:none;">
           VOTES: {{ post.votes.length }}
           <post-vote [postId]="post.id"></post-vote>
         </div>

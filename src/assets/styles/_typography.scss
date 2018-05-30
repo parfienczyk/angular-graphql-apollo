@@ -1,1 +1,30 @@
-
+@import "colors";
+.underline {
+  transition: all 0.2s 0s ease-out;
+  cursor: pointer;
+  margin-right: 20px;
+  position: relative;
+  transition-delay: 1s;
+  position: relative; // color: $color-primary;
+  margin-right: 30px;
+  text-decoration: none;
+  padding-bottom: 5px;
+  &::after {
+    transition: all 0.6s 0s cubic-bezier(0.19, 1, 0.22, 1);
+    background-color: currentColor;
+    bottom: 10px;
+    content: "";
+    height: 10px;
+    left: 0;
+    position: absolute;
+    top: auto;
+    width: 0;
+  }
+  &:hover {
+    text-decoration: none;
+    &::after {
+      color: $color-primary;
+      width: 100%;
+    }
+  }
+}

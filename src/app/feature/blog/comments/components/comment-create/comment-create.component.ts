@@ -8,6 +8,7 @@ import * as GQL from './../../graphql';  // GraphQL queries
 
 // common
 import { Post } from '../../../posts/models/Post';
+import { AuthService } from '@app/feature/auth/services/auth.service';
 
 const MAX_LENGTH_COMMENT = 250;
 
@@ -39,6 +40,7 @@ export class CommentCreateComponent implements OnInit {
     private fb: FormBuilder,
     private apollo: Apollo,
     private route: ActivatedRoute,
+    private authService: AuthService,
   ) { }
 
   ngOnInit() {
@@ -67,6 +69,7 @@ export class CommentCreateComponent implements OnInit {
       variables: {
         content,
         postId: this.postId,
+        authorId: this.authService.userId
       },
       // optimisticResponse: {
       //   __typename: 'Mutation',
@@ -94,14 +97,15 @@ export class CommentCreateComponent implements OnInit {
       );
   }
 
-
   private updateStoreWithFragment(store, newComment) {
     const storeCache: any = store.readFragment({
       id: `Post:${this.postId}`,
       fragment: GQL.ONE_POSTS_QUERY_FRAGMENT,
     });
 
+    // update store cache
     storeCache.comments = [newComment, ...storeCache.comments];
+    storeCache._commentsMeta.count++;
 
     store.writeFragment({
       id: `Post:${this.postId}`,

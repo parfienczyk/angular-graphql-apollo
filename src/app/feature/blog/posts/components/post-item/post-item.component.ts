@@ -11,11 +11,11 @@ import * as GQL from './../../graphql';  // GraphQL queries
     <article>
       <!-- <img src="https://placeimg.com/640/200/any" alt=""> -->
 
+      <div class="date">{{ post.createdAt|date:'medium' }}</div>
       <h4 [routerLink]="['/post', post.id]">{{ post.title }}</h4>
       <div class="description">{{ post.description }}</div>
 
       <section class="info">
-        <span>{{ post.createdAt|date:'short' }}</span>
         <span>
           <img src="https://png.icons8.com/ios/20/000000/chat.png">
           Comments ({{ post._commentsMeta.count }})

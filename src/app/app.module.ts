@@ -16,6 +16,9 @@ import { AuthModule } from './feature/auth/auth.module';
 import { CommentsModule } from './feature/blog/comments/comments.module';
 import { SharedModule } from './shared/shared.module';
 
+// common
+import { AuthService } from '@app/feature/auth/services/auth.service';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -36,7 +39,9 @@ import { SharedModule } from './shared/shared.module';
     AuthModule,
     SharedModule,
   ],
-  providers: [],
+  providers: [
+    AuthService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

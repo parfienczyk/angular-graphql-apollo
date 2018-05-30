@@ -16,8 +16,8 @@ import { Subscription } from 'rxjs/Subscription';
   selector: 'posts-list',
   template: `
     <section>
+      <h2 *ngIf="loading">Loading...</h2>
       <div id="posts">
-        <h4 *ngIf="loading">Loading...</h4>
         <post-item *ngFor="let post of posts" [post]="post" [@flyInOut2]></post-item>
       </div>
     </section>
@@ -55,16 +55,16 @@ export class PostsListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.postQuery = this.apollo
-      .watchQuery<Query.AllPostQueryResponse>({
+      .watchQuery({
         query: Query.ALL_POSTS_QUERY
       });
 
-    this.postSubscription = this.postQuery.valueChanges.subscribe(
-      ({ data, loading }) => {
-        this.posts = [...data.allPosts];
+    this.postSubscription = this.postQuery
+      .valueChanges
+      .subscribe(({ data: { allPosts }, loading }) => {
+        this.posts = allPosts;
         this.loading = loading;
-      }
-    );
+      });
 
     this.setupSubscription();
   }

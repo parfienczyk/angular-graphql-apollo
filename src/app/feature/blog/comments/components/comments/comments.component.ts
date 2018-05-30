@@ -22,12 +22,16 @@ export const COMMENTS_PER_QUERY = 5;
     <section *ngIf="comments.length" class="comments">
       <h4>Comments [ {{ counter }} ]</h4>
 
-      <article *ngFor="let comment of comments" [@flyInOut]>
+      <!-- <article *ngFor="let comment of comments" [@flyInOut]>-->
+      <article *ngFor="let comment of comments">
+        <div><img [src]="comment.author.avatarUrl" alt=""></div>
+        <div>
           <p>{{ comment.content }}</p>
           <div class="info">
-            Author: XXX XXX,
-            Added: {{ comment.createdAt|date:'short' }}
+            <strong>{{ comment.author.firstName }} {{ comment.author.lastName }}</strong>,
+            {{ comment.createdAt|date:'short' }}
           </div>
+        </div>
       </article>
 
       <kp-button
@@ -39,7 +43,7 @@ export const COMMENTS_PER_QUERY = 5;
     </section>
   `,
   styleUrls: ['./comments.component.scss'],
-  animations: [Animations.flyInOut]
+  // animations: [Animations.flyInOut]
 })
 export class CommentsComponent implements OnInit, AfterViewInit {
 
@@ -55,7 +59,6 @@ export class CommentsComponent implements OnInit, AfterViewInit {
   comments: Comment[] = [];
   loading = true;
   counter = 0;
-
 
   constructor(
     private apollo: Apollo,
@@ -82,7 +85,6 @@ export class CommentsComponent implements OnInit, AfterViewInit {
   }
 
   loadMore() {
-    // set loading info
     this.loading = true;
 
     // fetch more

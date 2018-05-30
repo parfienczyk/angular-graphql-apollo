@@ -41,12 +41,7 @@ export class PostCreateComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form.value);
-    this.createLink(this.form.value);
-  }
-
-  createLink(data) {
-    const { title, description } = data;
+    const { title, description } = this.form.value;
 
     this.apollo.mutate({
       mutation: GQL.CREATE_POST_MUTATION,
@@ -73,7 +68,8 @@ export class PostCreateComponent implements OnInit {
     });
 
     data.allPosts.push(createPost);
-    store.writeQuery({ query: GQL.ALL_POSTS_QUERY, data });
+    store.writeQuery({
+      query: GQL.ALL_POSTS_QUERY, data
+    });
   }
-
 }

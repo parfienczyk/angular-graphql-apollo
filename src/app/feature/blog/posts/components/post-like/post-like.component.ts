@@ -18,7 +18,7 @@ const ONE_POST_LIKES_FRAGMENT = gql`
   selector: 'post-like',
   template: `
     <button (click)="like()">
-      +1 LIKE <img src="https://png.icons8.com/ios/20/000000/applause.png">
+      +1 LIKE <img src="https://png.icons8.com/ios/30/000000/applause.png">
     </button>
   `,
   styleUrls: ['./post-like.component.scss']
@@ -44,32 +44,23 @@ export class PostLikeComponent {
         },
       },
       update: (store, { data: { updatePost } }) => {
-        // console.log(store);
-        // console.log(updatePost);
-        // this.updateStoreAfterVote(store, createVote, postId);
-
-
-        const data: any = store.readFragment({
+        // read
+        const dataFragment: any = store.readFragment({
           id: `Post:${this.post.id}`,
           fragment: ONE_POST_LIKES_FRAGMENT,
         });
 
+        // write
         store.writeFragment({
           id: `Post:${this.post.id}`,
           fragment: ONE_POST_LIKES_FRAGMENT,
           data: {
-            ...data,
-            likes: data.likes + 1,
+            ...dataFragment,
+            likes: dataFragment.likes + 1,
           }
         });
-
-        console.log('[readFragment]', data);
-
       }
     })
       .subscribe();
-
   }
-
-
 }
